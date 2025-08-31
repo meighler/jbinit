@@ -46,7 +46,12 @@ jobs:
           gmake -j$(sysctl -n hw.ncpu) DEV_BUILD=1
 
 
-      - name: Prepare for upload (DEVELOPMENT)
-        run: |
-          cp src/ramdisk.dmg dist/ramdisk.development.dmg
-          cp src/binpack.dmg dist/binpack.development.dmg
+    - name: Upload Release Artifacts
+    uses: actions/upload-artifact@v4
+    with:
+        name: jbinit-artifacts
+        path: dist/*
+        retention-days: 90
+        if-no-files-found: error
+        
+        
